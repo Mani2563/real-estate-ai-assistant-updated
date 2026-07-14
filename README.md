@@ -103,10 +103,10 @@ Access at: `http://localhost:8501`
 - Legal Documents (DOCX)
 - Policies & Terms (HTML/DOCX)
 
-**Embedding Model:** BAAI/bge-small-en-v1.5 (HuggingFace)  
+**Embedding Model:** all-MiniLM-L6-v2 (SentenceTransformer - No HuggingFace dependency)  
 **Vector Database:** FAISS  
 **LLM:** Llama 3.3 70B (via Groq)  
-**Similarity Threshold:** 0.5 (Cosine similarity)
+**Similarity Threshold:** 0.25 (Cosine similarity)
 
 ---
 
@@ -129,6 +129,7 @@ Deploy to any platform (Streamlit Cloud, Heroku, Railway, Render, etc.)
 - Set `GROQ_API_KEY` environment variable
 - Ensure `/data` and `/store` folders are included
 - Use Python 3.9+
+- No HuggingFace API key needed (embeddings run locally)
 
 ---
 
@@ -136,7 +137,7 @@ Deploy to any platform (Streamlit Cloud, Heroku, Railway, Render, etc.)
 
 - **Frontend:** Streamlit
 - **Backend:** LangChain, Groq
-- **Embeddings:** HuggingFace (BAAI/bge-small-en-v1.5)
+- **Embeddings:** SentenceTransformer (all-MiniLM-L6-v2) - Local, no HuggingFace API
 - **Vector DB:** FAISS
 - **Document Processing:** PyPDF, Docx2txt, BeautifulSoup4
 
