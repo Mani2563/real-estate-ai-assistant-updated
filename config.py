@@ -30,7 +30,7 @@ TOP_K = 4
 # Models
 # -----------------------------------------------------
 
-EMBEDDING_MODEL = "BAAI/bge-small-en-v1.5"
+EMBEDDING_MODEL = "all-MiniLM-L6-v2"
 
 LLM_MODEL = "llama-3.3-70b-versatile"
 
@@ -38,9 +38,21 @@ LLM_MODEL = "llama-3.3-70b-versatile"
 # API Keys
 # -----------------------------------------------------
 
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+GROQ_API_KEY = os.getenv("GROQ_API_KEY") or os.getenv("groq_api_key")
+
+
+def _get_streamlit_secret():
+    try:
+        import streamlit as st
+
+        for key in ("GROQ_API_KEY", "groq_api_key", "api_key"):
+            if key in st.secrets:
+                return st.secrets[key]
+    except Exception:
+        return None
+
+    return None
+
 
 if not GROQ_API_KEY:
-    raise ValueError(
-        "GROQ_API_KEY not found. Please configure it in the .env file."
-    )
+    GROQ_API_KEY = _get_streamlit_secret()
